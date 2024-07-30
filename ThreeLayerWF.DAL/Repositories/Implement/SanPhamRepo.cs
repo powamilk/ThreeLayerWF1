@@ -84,7 +84,7 @@ namespace ThreeLayerWF.DAL.Repositories.Implement
                 sanPham.TrangThai = pham.TrangThai;
                 sanPham.MaLoai = pham.MaLoai;
 
-                _appDbContext.Add(sanPham);
+                _appDbContext.Update(sanPham);
                 _appDbContext.SaveChanges();
 
                 return true;

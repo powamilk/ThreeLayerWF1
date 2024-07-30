@@ -9,7 +9,7 @@ using ThreeLayerWF.DAL.Repositories.Interface;
 
 namespace ThreeLayerWF.BUS.Implement
 {
-    public class SanPhamServices : ISanPhamServices
+    public class SanPhamServices : ISanPhamService
     {
         private readonly ISanPhamRepo _repo;
         private readonly AppDbContext _appDbContext;
@@ -76,10 +76,10 @@ namespace ThreeLayerWF.BUS.Implement
         public string GetLoaiSanPhamName(int? maLoai)
         {
             if (maLoai == null)
-                return "ko xác định";
+                return "không xác định";
 
             var loaiSanPham = _appDbContext.LoaiSanPhams.FirstOrDefault(lsp => lsp.MaLoai == maLoai);
-            return loaiSanPham?.TenLoai ?? "ko xác định";
+            return loaiSanPham?.TenLoai ?? "không xác định";
         }
     }
 }

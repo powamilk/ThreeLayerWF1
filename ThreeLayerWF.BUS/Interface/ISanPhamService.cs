@@ -2,7 +2,7 @@
 
 namespace ThreeLayerWF.BUS.Interface
 {
-    public interface ISanPhamServices
+    public interface ISanPhamService
     {
         SanPhamVM GetByCode(int code);
         List<SanPhamVM> GetList();
@@ -11,7 +11,6 @@ namespace ThreeLayerWF.BUS.Interface
         bool Update(SanPhamUpdateVM updateVM);
         List<SanPhamVM> GetListOrderByName();
         //List<SanPhamVM> GetListByName();
-
         string GetLoaiSanPhamName(int? maLoai);
     }
 }

@@ -8,8 +8,8 @@ namespace ThreeLayerWF.PL
     public partial class Form1 : Form
     {
         List<SanPhamVM> _sanPhams;
-        ISanPhamServices _sanPhamServices;
-        string _tenSPChon;
+        ISanPhamService _sanPhamServices;
+        int _maSanPhamChon;
 
         public Form1()
         {
@@ -39,11 +39,11 @@ namespace ThreeLayerWF.PL
             cb_trangthai.Items.Add("2");
             cb_trangthai.SelectedIndex = 0;
 
-            txt_tensanpham.Text = string.Empty;
-            txt_nhasanxuat.Text = string.Empty;
-            txt_xuatxu.Text = string.Empty;
-            txt_mota.Text = string.Empty;
-
+            txt_timkiem.PlaceholderText = HienThi("tên sản phẩm cần tìm");
+            txt_tensanpham.PlaceholderText = HienThi("tên sản phẩm");
+            txt_nhasanxuat.PlaceholderText = HienThi("nhà sản xuất");
+            txt_xuatxu.PlaceholderText = HienThi("xuất xứ");
+            txt_mota.PlaceholderText = HienThi("mô tả");
 
             dgv_sanpham.Columns.Clear();
             dgv_sanpham.Columns.Add("CLm1", "STT");
@@ -51,33 +51,64 @@ namespace ThreeLayerWF.PL
             dgv_sanpham.Columns.Add("CLm3", "Giá Bán");
             dgv_sanpham.Columns.Add("CLm4", "Số Lượng Tồn");
             dgv_sanpham.Columns.Add("CLm5", "Nhà Sản Xuất");
-            dgv_sanpham.Columns.Add("CLm6", "Trạng Thái");
-            dgv_sanpham.Columns.Add("CLm7", "Mô tả");
-            dgv_sanpham.Columns.Add("clm8", "Mã Loại");
+            dgv_sanpham.Columns.Add("clm6", "Xuất Xứ");
+            dgv_sanpham.Columns.Add("CLm7", "Trạng Thái");
+            dgv_sanpham.Columns.Add("CLm8", "Mô tả");
+            dgv_sanpham.Columns.Add("clm9", "Mã Loại");
         }
+
+
 
         private string HienThi(string text)
         {
             return $"Nhập {text}";
         }
 
+        private int TaoMaSanPham()
+        {
+            var sanPhams = _sanPhamServices.GetList();
+            var lastMaSanPham = sanPhams
+                .Select(sp => sp.MaSanPham)
+                .OrderByDescending(ma => ma)
+                .FirstOrDefault();
+            return lastMaSanPham + 1;
+        }
+
         private void LoadGridData()
         {
-            _sanPhams = _sanPhamServices.GetList(); // Lấy danh sách sản phẩm từ dịch vụ
+            _sanPhams = _sanPhamServices.GetList();
 
             dgv_sanpham.Rows.Clear();
 
             foreach (var pham in _sanPhams)
             {
-                string trangThai = pham.TrangThai == 1 ? "Đang bán" : "Tạm dừng";
+                string trangThai;
+
+                // Kiểm tra trạng thái và thiết lập giá trị hiển thị
+                switch (pham.TrangThai)
+                {
+                    case 1:
+                        trangThai = "Đang bán";
+                        break;
+                    case 2:
+                        trangThai = "Tạm dừng";
+                        break;
+                    default:
+                        trangThai = "Không xác định";
+                        break;
+                }
+
+                // Lấy tên loại sản phẩm từ dịch vụ
                 string maLoaiDisplay = _sanPhamServices.GetLoaiSanPhamName(pham.MaLoai);
 
+                // Thêm dữ liệu vào DataGridView
                 dgv_sanpham.Rows.Add(
                     (_sanPhams.IndexOf(pham) + 1),
                     pham.TenSanPham,
                     pham.GiaBan,
                     pham.SoLuongTon,
                     pham.NhaSanXuat,
+                    pham.XuatXu,
                     trangThai,
                     pham.MoTa,
                     maLoaiDisplay
@@ -91,39 +122,55 @@ namespace ThreeLayerWF.PL
             LoadGridData();
         }
 
-        private void dgv_sanpham_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgv_sanpham_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             var index = e.RowIndex;
 
-            if (index < 0 || index > _sanPhams.Count - 1)
+            if (index < 0 || index >= _sanPhams.Count)
             {
-                _tenSPChon = string.Empty;
+                _maSanPhamChon = 0;
                 return;
             }
-            var tenSPChon = _sanPhams.ElementAt(index);
 
-            _tenSPChon = tenSPChon.TenSanPham;
-            txt_tensanpham.Text = tenSPChon.TenSanPham;
-            cb_giaban.Text = tenSPChon.GiaBan.ToString();
-            cb_soluongton.Text = tenSPChon.SoLuongTon.ToString();
-            txt_nhasanxuat.Text = tenSPChon.NhaSanXuat;
-            cb_trangthai.Text = tenSPChon.TrangThai.ToString();
-            txt_xuatxu.Text = tenSPChon.XuatXu;
-            txt_mota.Text = tenSPChon.MoTa;
+            var sanPhamChon = _sanPhams.ElementAt(index);
+
+            _maSanPhamChon = sanPhamChon.MaSanPham;
+            txt_tensanpham.Text = sanPhamChon.TenSanPham;
+            cb_giaban.Text = sanPhamChon.GiaBan.ToString();
+            cb_soluongton.Text = sanPhamChon.SoLuongTon.ToString();
+            txt_nhasanxuat.Text = sanPhamChon.NhaSanXuat;
+            cb_trangthai.Text = sanPhamChon.TrangThai.ToString();
+            txt_xuatxu.Text = sanPhamChon.XuatXu;
+            txt_mota.Text = sanPhamChon.MoTa;
         }
 
         private void btn_them_Click(object sender, EventArgs e)
         {
+            bool isGiaBanValid = int.TryParse(cb_giaban.Text, out int giaBan);
+            bool isSoLuongTonValid = int.TryParse(cb_soluongton.Text, out int soLuongTon);
+            bool isTrangThaiValid = int.TryParse(cb_trangthai.Text, out int trangThai);
+
+            if (!isGiaBanValid || giaBan <= 0 ||
+                !isSoLuongTonValid || soLuongTon <= 0 ||
+                !isTrangThaiValid || trangThai <= 0)
+            {
+                MessageBoxExtension.Notification("THÊM", "Các trường số phải là số nguyên dương.");
+                return;
+            }
+
             if (MessageBoxExtension.Confirm("thêm"))
             {
+                var newMaSanPham = TaoMaSanPham();
+
                 var sanPhamCreate = new SanPhamCreateVM
                 {
+                    MaSanPham = newMaSanPham,
                     TenSanPham = txt_tensanpham.Text,
-                    GiaBan = int.Parse(cb_giaban.Text),
-                    SoLuongTon = int.Parse(cb_soluongton.Text),
+                    GiaBan = giaBan,
+                    SoLuongTon = soLuongTon,
                     NhaSanXuat = txt_nhasanxuat.Text,
                     XuatXu = txt_xuatxu.Text,
-                    TrangThai = int.Parse(cb_trangthai.Text),
+                    TrangThai = trangThai,
                     MoTa = txt_mota.Text
                 };
 
@@ -135,21 +182,33 @@ namespace ThreeLayerWF.PL
 
         private void btn_sua_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(_tenSPChon))
+            if (_maSanPhamChon == 0)
             {
                 MessageBoxExtension.Notification("CHỈNH SỬA", "Vui lòng chọn sản phẩm cần chỉnh sửa.");
                 return;
             }
 
+            bool isGiaBanValid = int.TryParse(cb_giaban.Text, out int giaBan);
+            bool isSoLuongTonValid = int.TryParse(cb_soluongton.Text, out int soLuongTon);
+            bool isTrangThaiValid = int.TryParse(cb_trangthai.Text, out int trangThai);
+
+            if (!isGiaBanValid || giaBan <= 0 ||
+                !isSoLuongTonValid || soLuongTon <= 0 ||
+                !isTrangThaiValid || trangThai <= 0)
+            {
+                MessageBoxExtension.Notification("CHỈNH SỬA", "Các trường số phải là số nguyên dương.");
+                return;
+            }
+
             var spUpdate = new SanPhamUpdateVM
             {
-                MaSanPham = _sanPhams.FirstOrDefault(p => p.TenSanPham == _tenSPChon)?.MaSanPham ?? 0,
+                MaSanPham = _maSanPhamChon,
                 TenSanPham = txt_tensanpham.Text,
-                GiaBan = int.Parse(cb_giaban.Text),
-                SoLuongTon = int.Parse(cb_soluongton.Text),
+                GiaBan = giaBan,
+                SoLuongTon = soLuongTon,
                 NhaSanXuat = txt_nhasanxuat.Text,
                 XuatXu = txt_xuatxu.Text,
-                TrangThai = int.Parse(cb_trangthai.Text),
+                TrangThai = trangThai,
                 MoTa = txt_mota.Text
             };
 
@@ -163,7 +222,7 @@ namespace ThreeLayerWF.PL
 
         private void btn_xoa_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(_tenSPChon))
+            if (_maSanPhamChon == 0)
             {
                 MessageBoxExtension.Notification("XÓA", "Vui lòng chọn sản phẩm cần xóa.");
                 return;
@@ -171,8 +230,7 @@ namespace ThreeLayerWF.PL
 
             if (MessageBoxExtension.Confirm("xóa"))
             {
-                var code = _sanPhams.FirstOrDefault(p => p.TenSanPham == _tenSPChon)?.MaSanPham ?? 0;
-                var result = _sanPhamServices.Delete(code);
+                var result = _sanPhamServices.Delete(_maSanPhamChon);
 
                 string msg = result ? "Xóa thành công" : "Xóa thất bại";
                 MessageBoxExtension.Notification("XÓA", msg);
@@ -199,27 +257,6 @@ namespace ThreeLayerWF.PL
                     sp.MoTa
                 );
             }
-        }
-
-        private void dgv_sanpham_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            var index = e.RowIndex;
-
-            if (index < 0 || index > _sanPhams.Count - 1)
-            {
-                _tenSPChon = string.Empty;
-                return;
-            }
-            var tenSPChon = _sanPhams.ElementAt(index);
-
-            _tenSPChon = tenSPChon.TenSanPham;
-            txt_tensanpham.Text = tenSPChon.TenSanPham;
-            cb_giaban.Text = tenSPChon.GiaBan.ToString();
-            cb_soluongton.Text = tenSPChon.SoLuongTon.ToString();
-            txt_nhasanxuat.Text = tenSPChon.NhaSanXuat;
-            cb_trangthai.Text = tenSPChon.TrangThai.ToString();
-            txt_xuatxu.Text = tenSPChon.XuatXu;
-            txt_mota.Text = tenSPChon.MoTa;
         }
     }
 }

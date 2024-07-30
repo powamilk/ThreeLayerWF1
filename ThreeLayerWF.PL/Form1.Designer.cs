@@ -55,7 +55,7 @@
             // 
             label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Location = new Point(41, 46);
+            label1.Location = new Point(42, 10);
             label1.Name = "label1";
             label1.Size = new Size(81, 15);
             label1.TabIndex = 0;
@@ -65,7 +65,7 @@
             // 
             label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Location = new Point(41, 82);
+            label2.Location = new Point(42, 46);
             label2.Name = "label2";
             label2.Size = new Size(47, 15);
             label2.TabIndex = 1;
@@ -75,7 +75,7 @@
             // 
             label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label3.AutoSize = true;
-            label3.Location = new Point(41, 122);
+            label3.Location = new Point(42, 86);
             label3.Name = "label3";
             label3.Size = new Size(80, 15);
             label3.TabIndex = 2;
@@ -85,7 +85,7 @@
             // 
             label4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label4.AutoSize = true;
-            label4.Location = new Point(41, 157);
+            label4.Location = new Point(42, 121);
             label4.Name = "label4";
             label4.Size = new Size(78, 15);
             label4.TabIndex = 3;
@@ -95,7 +95,7 @@
             // 
             label5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label5.AutoSize = true;
-            label5.Location = new Point(41, 192);
+            label5.Location = new Point(42, 156);
             label5.Name = "label5";
             label5.Size = new Size(48, 15);
             label5.TabIndex = 4;
@@ -105,7 +105,7 @@
             // 
             label6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label6.AutoSize = true;
-            label6.Location = new Point(41, 222);
+            label6.Location = new Point(42, 186);
             label6.Name = "label6";
             label6.Size = new Size(61, 15);
             label6.TabIndex = 5;
@@ -115,7 +115,7 @@
             // 
             label7.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label7.AutoSize = true;
-            label7.Location = new Point(41, 250);
+            label7.Location = new Point(42, 214);
             label7.Name = "label7";
             label7.Size = new Size(40, 15);
             label7.TabIndex = 6;
@@ -124,60 +124,60 @@
             // txt_tensanpham
             // 
             txt_tensanpham.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txt_tensanpham.Location = new Point(128, 43);
+            txt_tensanpham.Location = new Point(129, 7);
             txt_tensanpham.Name = "txt_tensanpham";
-            txt_tensanpham.Size = new Size(187, 23);
+            txt_tensanpham.Size = new Size(345, 23);
             txt_tensanpham.TabIndex = 7;
             // 
             // cb_giaban
             // 
             cb_giaban.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             cb_giaban.FormattingEnabled = true;
-            cb_giaban.Location = new Point(128, 82);
+            cb_giaban.Location = new Point(129, 46);
             cb_giaban.Name = "cb_giaban";
-            cb_giaban.Size = new Size(189, 23);
+            cb_giaban.Size = new Size(347, 23);
             cb_giaban.TabIndex = 8;
             // 
             // cb_soluongton
             // 
             cb_soluongton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             cb_soluongton.FormattingEnabled = true;
-            cb_soluongton.Location = new Point(128, 119);
+            cb_soluongton.Location = new Point(129, 83);
             cb_soluongton.Name = "cb_soluongton";
-            cb_soluongton.Size = new Size(189, 23);
+            cb_soluongton.Size = new Size(347, 23);
             cb_soluongton.TabIndex = 9;
             // 
             // txt_nhasanxuat
             // 
             txt_nhasanxuat.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txt_nhasanxuat.Location = new Point(130, 154);
+            txt_nhasanxuat.Location = new Point(131, 118);
             txt_nhasanxuat.Name = "txt_nhasanxuat";
-            txt_nhasanxuat.Size = new Size(187, 23);
+            txt_nhasanxuat.Size = new Size(345, 23);
             txt_nhasanxuat.TabIndex = 10;
             // 
             // txt_xuatxu
             // 
             txt_xuatxu.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txt_xuatxu.Location = new Point(130, 192);
+            txt_xuatxu.Location = new Point(131, 156);
             txt_xuatxu.Name = "txt_xuatxu";
-            txt_xuatxu.Size = new Size(187, 23);
+            txt_xuatxu.Size = new Size(345, 23);
             txt_xuatxu.TabIndex = 11;
             // 
             // txt_mota
             // 
             txt_mota.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txt_mota.Location = new Point(128, 251);
+            txt_mota.Location = new Point(129, 215);
             txt_mota.Name = "txt_mota";
-            txt_mota.Size = new Size(187, 23);
+            txt_mota.Size = new Size(345, 23);
             txt_mota.TabIndex = 12;
             // 
             // cb_trangthai
             // 
             cb_trangthai.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             cb_trangthai.FormattingEnabled = true;
-            cb_trangthai.Location = new Point(128, 222);
+            cb_trangthai.Location = new Point(129, 186);
             cb_trangthai.Name = "cb_trangthai";
-            cb_trangthai.Size = new Size(189, 23);
+            cb_trangthai.Size = new Size(347, 23);
             cb_trangthai.TabIndex = 13;
             // 
             // dgv_sanpham
@@ -190,11 +190,11 @@
             dgv_sanpham.Size = new Size(776, 150);
             dgv_sanpham.TabIndex = 14;
             dgv_sanpham.CellClick += dgv_sanpham_CellClick;
-            dgv_sanpham.CellContentClick += dgv_sanpham_CellContentClick;
             // 
             // btn_them
             // 
-            btn_them.Location = new Point(380, 31);
+            btn_them.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            btn_them.Location = new Point(573, 24);
             btn_them.Name = "btn_them";
             btn_them.Size = new Size(165, 45);
             btn_them.TabIndex = 15;
@@ -204,7 +204,8 @@
             // 
             // btn_sua
             // 
-            btn_sua.Location = new Point(569, 31);
+            btn_sua.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            btn_sua.Location = new Point(573, 86);
             btn_sua.Name = "btn_sua";
             btn_sua.Size = new Size(165, 45);
             btn_sua.TabIndex = 16;
@@ -214,7 +215,8 @@
             // 
             // btn_xoa
             // 
-            btn_xoa.Location = new Point(380, 97);
+            btn_xoa.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            btn_xoa.Location = new Point(573, 156);
             btn_xoa.Name = "btn_xoa";
             btn_xoa.Size = new Size(165, 45);
             btn_xoa.TabIndex = 17;
@@ -224,7 +226,8 @@
             // 
             // btn_reset
             // 
-            btn_reset.Location = new Point(569, 97);
+            btn_reset.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            btn_reset.Location = new Point(573, 222);
             btn_reset.Name = "btn_reset";
             btn_reset.Size = new Size(165, 45);
             btn_reset.TabIndex = 18;
@@ -235,9 +238,9 @@
             // txt_timkiem
             // 
             txt_timkiem.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txt_timkiem.Location = new Point(391, 247);
+            txt_timkiem.Location = new Point(42, 244);
             txt_timkiem.Name = "txt_timkiem";
-            txt_timkiem.Size = new Size(343, 23);
+            txt_timkiem.Size = new Size(434, 23);
             txt_timkiem.TabIndex = 19;
             txt_timkiem.Text = "Tìm Kiếm theo tên";
             txt_timkiem.TextChanged += txt_timkiem_TextChanged;

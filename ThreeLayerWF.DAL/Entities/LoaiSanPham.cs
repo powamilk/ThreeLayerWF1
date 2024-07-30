@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ThreeLayerWF.DAL.Entities
+﻿namespace ThreeLayerWF.DAL.Entities
 {
     public partial class LoaiSanPham
     {
@@ -9,7 +6,6 @@ namespace ThreeLayerWF.DAL.Entities
         {
             SanPhams = new HashSet<SanPham>();
         }
-
         public int MaLoai { get; set; }
         public string TenLoai { get; set; } = null!;
         public string? MoTa { get; set; }
